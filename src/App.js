@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState } from 'react'
 import Header from './Header';
 import Footer from './Footer';
+import Jokes from './Bitly';
 
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
@@ -11,6 +12,7 @@ import TextField from '@material-ui/core/TextField'
 
 import SaveIcon from '@material-ui/icons/Save'
 import ShortTextIcon from '@material-ui/icons/ShortText'
+import logo from './powered_bitly.png';
 
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { orange, yellow } from '@material-ui/core/colors'
@@ -55,6 +57,7 @@ function App() {
       <div className="App">
         <header className="App-header">
           <Header/>
+          <img src={logo} alt="Logo" />
           <TextField
             required id="standard-required"
             label="Required"
@@ -71,6 +74,7 @@ function App() {
               {buttonText}
             </Button>
           </ButtonGroup>
+          <Jokes/>
         </header>
         <Footer/>
       </div>
