@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './Header';
 import Footer from './Footer';
 
@@ -10,17 +10,16 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import TextField from '@material-ui/core/TextField'
 
 import SaveIcon from '@material-ui/icons/Save'
-import ReplayIcon from '@material-ui/icons/Replay'
 import ShortTextIcon from '@material-ui/icons/ShortText'
 
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import { blue, yellow } from '@material-ui/core/colors'
+import { orange, yellow } from '@material-ui/core/colors'
 import 'fontsource-roboto';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: blue[500],
+      main: orange[900],
     },
     secondary: {
       main: yellow[500],
@@ -29,7 +28,7 @@ const theme = createMuiTheme({
 })
 
 function CheckboxExample () {
-  const [checked, setChecked] = React.useState(true)
+  const [checked, setChecked] = useState(true)
   return (
     <FormControlLabel
       control={<Checkbox
@@ -48,6 +47,9 @@ function CheckboxExample () {
 
 
 function App() {
+  const [buttonText, setButtonText] = useState("SHORTEN");
+  const changeText = (text) => setButtonText(text);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
@@ -64,13 +66,9 @@ function App() {
           <ButtonGroup variant="contained" size="large">
             <Button
             startIcon={<ShortTextIcon />}
-            color="primary">
-              SHORTEN
-            </Button>
-            <Button
-            startIcon={<ReplayIcon />}
-            color="secondary">
-              CLEAR
+            color="primary"
+            onClick={() => changeText("COPY")}>
+              {buttonText}
             </Button>
           </ButtonGroup>
         </header>
