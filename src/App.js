@@ -1,11 +1,10 @@
 import './App.css';
 import React, { useState } from 'react'
+
 import Header from './Header';
 import Footer from './Footer';
-import Jokes from './Bitly';
 
 import Button from '@material-ui/core/Button'
-import ButtonGroup from '@material-ui/core/ButtonGroup'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import TextField from '@material-ui/core/TextField'
@@ -18,6 +17,18 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { orange, yellow } from '@material-ui/core/colors'
 import 'fontsource-roboto';
 
+const BitlyClient = require('bitly').BitlyClient;
+const bitly = new BitlyClient(''); //Your bitly API key
+
+bitly
+  .shorten("") //url to shorten
+  .then(function(result) {
+    console.log(result);
+  })
+  .catch(function(error) {
+    console.error(error);
+  });
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -29,7 +40,7 @@ const theme = createMuiTheme({
   }
 })
 
-function CheckboxExample () {
+function CheckboxOne () {
   const [checked, setChecked] = useState(true)
   return (
     <FormControlLabel
@@ -47,6 +58,17 @@ function CheckboxExample () {
   )
 }
 
+function UrlTextArea () {
+  return (
+    <TextField
+      required id="standard-required"
+      label="Required"
+      placeholder="Link to shorten"
+      variant="outlined"
+      type="link"
+    />
+  )
+}
 
 function App() {
   const [buttonText, setButtonText] = useState("SHORTEN");
@@ -58,23 +80,16 @@ function App() {
         <header className="App-header">
           <Header/>
           <img src={logo} alt="Logo" />
-          <TextField
-            required id="standard-required"
-            label="Required"
-            placeholder="Link to shorten"
-            variant="outlined"
-            type="link"
-          />
-          <CheckboxExample />
-          <ButtonGroup variant="contained" size="large">
-            <Button
+          <UrlTextArea />
+          <CheckboxOne />
+          <Button
+            variant="contained"
+            size="large"
             startIcon={<ShortTextIcon />}
             color="primary"
             onClick={() => changeText("COPY")}>
               {buttonText}
-            </Button>
-          </ButtonGroup>
-          <Jokes/>
+          </Button>
         </header>
         <Footer/>
       </div>
